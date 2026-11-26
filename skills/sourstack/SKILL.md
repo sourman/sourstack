@@ -2,7 +2,7 @@
 name: sourstack
 description: >-
   Orchestrator mode for a ticket. The parent does not implement. It delegates
-  design, code, proof, a cross-provider review, and a naive UI pass. Use only
+  design, code, proof, review, and a naive UI pass. Use only
   when the user says sourstack, /sourstack, or attaches this skill.
 disable-model-invocation: true
 ---
@@ -57,7 +57,7 @@ You read that evidence. You do not redo the work to produce it. When the proof i
 
 Start these together after proof exists. Leave the checkout alone until they finish.
 
-**Code review.** One delegate on a different provider than the coder, high reasoning, read-only. It does not edit, commit, push, or start its own agents. It reads the diff and the surrounding code.
+**Code review.** One delegate, high reasoning, read-only. It does not edit, commit, push, or start its own agents. It reads the diff and the surrounding code.
 
 Brief:
 
@@ -110,9 +110,7 @@ Decide the rest. List those decisions in the report.
 
 ## Models
 
-In T3, call `orchestrator_capabilities` once before the first delegate. Design and code use a high-reasoning model. Review uses a different provider, read-only. The UI pass uses a cheaper model, two delegates, in parallel with review.
-
-Models named in the user message, `AGENTS.md`, or `CLAUDE.md` win. When a provider is unavailable, say so. A same-provider reviewer does not count as the cross-review.
+Cursor or Grok models only, unless the launch message names another provider or model. In T3, call `orchestrator_capabilities` once before the first delegate. Design and code: high reasoning. Review: high reasoning, read-only. UI pass: a cheaper model, two delegates, in parallel with review. A missing Cursor or Grok model gets reported. Do not substitute another provider.
 
 ## Report
 
