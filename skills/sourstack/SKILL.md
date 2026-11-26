@@ -1,24 +1,29 @@
 ---
 name: sourstack
 description: >-
-  Run the sourstack ticket loop: the parent designs and routes, a strong model
-  implements, a different provider reviews, and two cheaper models test the UI
-  as a user who has not read the diff. Use when the user says sourstack, names
-  this skill, or asks to run the sourstack loop on a ticket.
+  Orchestrator mode for a ticket. The parent does not implement. It delegates
+  design, code, proof, a cross-provider review, and a naive UI pass. Use only
+  when the user says sourstack, /sourstack, or attaches this skill.
 disable-model-invocation: true
 ---
 
 # Sourstack
 
-You are the parent. You own the design, the routing, and the report. On a non-trivial change you delegate the diff. You leave the pull request open.
+## Trigger
 
-Branch from the base the user names. With no base, branch from the latest default branch.
+This skill is off until the user says `sourstack` or attaches it. There is no second skill for this.
+
+That word is orchestrator mode. You coordinate. You do not implement. You do not edit product code, commit, or push. Design, implementation, proof, review, and the UI pass are delegates. You write the briefs, read their reports, route findings, ask on the stuck list, and open the pull request from the branch the coder pushed.
+
+A message that does not say `sourstack` is not this mode. Do the work in that chat yourself.
+
+Branch from the base the user names. With no base, the coder branches from the latest default branch.
 
 ## Match the work
 
 Pick one and say which.
 
-- A read-only question. Trace and answer. No edits.
+- A read-only question. Hand it to a research delegate. No edits.
 - A defect. Reproduce it, name the root cause, then fix that cause.
 - New or changed behavior. Name the data shape before anyone writes logic.
 - Structure only. Preserve behavior. Say the check that proves nothing user-visible changed.
@@ -28,7 +33,7 @@ Skip the design pass only for a local fix whose shape is already right. Say why 
 
 ## Design pass
 
-Use a high-reasoning model. Trace the subsystem the ticket touches.
+Delegate this to a high-reasoning model. It traces the subsystem the ticket touches.
 
 If an older decision causes the ticket, deleting that code is a candidate. Design the smaller system that remains, then build that.
 
@@ -44,9 +49,9 @@ Delegate the code to a high-reasoning coder. The brief carries the goal, the nam
 
 ## Prove it before review
 
-Proof is something you observed this run: the old failure then the fix, the repo's own checks, a focused test that failed before the fix when the repo has a test setup. For a screen, drive the running app. A green unit test does not prove the screen.
+The coder delegate brings the proof back: the old failure then the fix, the repo's own checks, a focused test that failed before the fix when the repo has a test setup. For a screen, that delegate drives the running app. A green unit test does not prove the screen.
 
-When you cannot prove the change, ask the user. Skip the review loop.
+You read that evidence. You do not redo the work to produce it. When the proof is missing, send the coder back. When there is no way to prove the change, ask the user and skip the review loop.
 
 ## Review, in parallel
 
@@ -75,7 +80,7 @@ Check every finding yourself.
 - A nit is declined in one line, or listed as a follow-up. It does not grow the diff.
 - A one-way door with no obvious answer waits on the user.
 
-Disagree in one or two lines with a file, a test, or output you ran. Agreement is not the way to end the loop.
+Disagree in one or two lines with a file, a test, or output a delegate already ran. Agreement is not the way to end the loop.
 
 ## Budget
 
@@ -87,7 +92,7 @@ Each round is a new delegate. Send the ledger: fixed, declined, and still open, 
 
 ## Ship
 
-Open the pull request. The description leads with the problem, then how you proved the change, then the ledger of declined findings. Rebase onto the latest default branch first when the repo expects that.
+The coder rebases onto the latest default branch when the repo expects that, then pushes. You open the pull request. The description leads with the problem, then how the change was proved, then the ledger of declined findings.
 
 Leave the pull request open. Merging, auto-merge, and a merge queue are outside this skill.
 

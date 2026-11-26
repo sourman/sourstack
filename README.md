@@ -13,6 +13,12 @@ git clone https://github.com/sourman/sourstack.git
 ln -sfn "$(pwd)/sourstack/skills/sourstack" ~/.agents/skills/sourstack
 ```
 
-Say `sourstack` and name the ticket.
+## Trigger
+
+Say `sourstack` and name the ticket. In Cursor, attach `/sourstack` from the slash menu before you send, so the skill is on that message.
+
+That word is the whole mode. The agent coordinates and the subagents do the work. There is no second skill. A message that does not say `sourstack` is a normal chat, and the agent does the work itself.
+
+The skill file sets `disable-model-invocation: true`, so naming it is required. It will not turn itself on because the task looks big.
 
 Personal model picks go in the repo you are working in (`AGENTS.md` or `CLAUDE.md`), so this skill can update without losing them.
